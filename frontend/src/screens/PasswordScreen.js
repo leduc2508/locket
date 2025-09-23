@@ -51,6 +51,7 @@ const PasswordScreen = () => {
                         index: 0,
                         routes: [{ name: 'Home', params: res.user }],
                     });
+                    console.log(res.user);
                 } else {
                     Alert.alert("Thông báo", "Tài khoản mật khẩu không chính xác, Vui lòng thử lại!");
                 }

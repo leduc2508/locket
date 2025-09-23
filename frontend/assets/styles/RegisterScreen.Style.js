@@ -32,7 +32,7 @@ export const RegisterStyle = StyleSheet.create({
     },
     input: {
         width: '90%',
-        backgroundColor: '#454545',
+        backgroundColor: '#474646c7',
         borderRadius: 30,
         paddingLeft: 20,
         paddingVertical: 10,

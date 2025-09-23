@@ -12,7 +12,7 @@ export const ThemeScreenStyle = StyleSheet.create({
         width: 210,
         height: 400,
         borderWidth: 12,
-        borderColor: '#454545',
+        borderColor: '#474646c7',
         borderRadius: 60,
         alignSelf: 'center',
         shadowColor: '#000',
@@ -52,7 +52,7 @@ export const ThemeScreenStyle = StyleSheet.create({
     rectangle: {
         width: 150,
         height: 40,
-        backgroundColor: "#454545",
+        backgroundColor: "#474646c7",
         borderRadius: 20,
         borderWidth: 2,
         marginTop: 90,

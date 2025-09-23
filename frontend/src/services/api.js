@@ -1,5 +1,6 @@
 import CryptoJS from "crypto-js";
-const API_URL = 'http://192.168.1.15:3000/api';
+// const API_URL = 'http://192.168.1.15:3000/api';
+const API_URL = 'http://192.168.1.10:3000/api';
 
 export const apiCheckEmail = async (email) => {
   try {
