@@ -7,4 +7,14 @@ export const AppNavigationStyle = StyleSheet.create({
     backgroundColor: '#454545',
     padding: 5,
   },
+  textRegular: {
+    fontSize: 30,
+    color: 'white',
+    fontFamily: 'Dongle-Regular',
+  },
+  textBold: {
+    fontSize: 30,
+    color: 'white',
+    fontFamily: 'Dongle-Bold',
+  },
 });
