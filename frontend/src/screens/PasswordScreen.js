@@ -23,7 +23,7 @@ const PasswordScreen = () => {
 
     const navigation = useNavigation();
     const route = useRoute();
-    const { email, phone, mode } = route.params || {};
+    const { email, phone, mode, createdAt } = route.params || {};
 
     const validatePassword = (text) => text.length >= 8;
 
@@ -45,13 +45,14 @@ const PasswordScreen = () => {
                 });
             } else if (mode === "login") {
                 // → Gọi API đăng nhập
-                const res = await apiLogin({ email, phone, password });
+                const res = await apiLogin({ email, phone, password, createdAt});
                 if (res.success) {
                     navigation.reset({
                         index: 0,
-                        routes: [{ name: 'Home', params: res.user }],
+                        routes: [
+                            { name: 'Home', params: { ...res.user, from: 'password' } },
+                        ],
                     });
-                    console.log(res.user);
                 } else {
                     Alert.alert("Thông báo", "Tài khoản mật khẩu không chính xác, Vui lòng thử lại!");
                 }

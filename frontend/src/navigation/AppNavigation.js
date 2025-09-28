@@ -7,6 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { AppNavigationStyle } from '../../assets/styles/AppNavigation.Style';
 import ThemeScreen from '../screens/ThemeScreen';
 import HomeScreen from '../screens/HomeScreen';
+import ActivityCalendarScreen from '../screens/ActivityCalendarScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import PasswordScreen from '../screens/PasswordScreen';
 import FullnameScreen from '../screens/FullnameScreen';
@@ -108,13 +109,29 @@ export default function AppNavigation() {
               ),
             })}
           />
+
           <Stack.Screen
             name="Home"
             component={HomeScreen}
-            options={{
-              headerShown: false,
+            options={({ route }) => {
+              const from = route?.params?.from;
+              return {
+                headerShown: false,
+                animation: from === 'password' ? 'slide_from_bottom' : 'slide_from_right',
+              };
             }}
           />
+
+          <Stack.Screen
+            name="ActivityCalendar"
+            component={ActivityCalendarScreen}
+            options={({ route }) => ({
+              headerShown: false,
+              animation: route?.params?.direction === 'left' ? 'slide_from_left' : 'slide_from_right',
+            })}
+          />
+
+
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

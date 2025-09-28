@@ -39,10 +39,11 @@ exports.createUser = async (req, res) => {
             username
         })
         await newUser.save();
+        console.log('New user khi save:', newUser);
         return res.status(201).json({
             success: true,
             message: "Tạo user thành công!",
-            user: newUser
+            user: newUser.toObject()
         })
     } catch (error) {
         console.log("Lỗi createUser:", error);
@@ -51,31 +52,45 @@ exports.createUser = async (req, res) => {
 }
 
 exports.login = async (req, res) => {
-    const { email, phone, password } = req.body;
-    try {
-        if((!email && !phone) || !password) {
-            return res.status(400).json({success: false, message: "Thiếu thông tin bắt buộc!"});
-        }
-        const user = await User.findOne(email? {email}: {phone});
-        if(!user) {
-            return res.status(404).json({success: false, message: 'Người dùng không tồn tại!'})
-        }
-        if(user.password !== password) {
-            return res.status(404).json({success: false, message: 'Sai mật khẩu!'})
-        } 
-        return res.status(200).json({
-            success: true,
-            message: "Đăng nhập thành công!",
-            user: {
-                id: user._id,
-                email: user.email,
-                phone: user.phone,
-                username: user.username,
-                fullname: user.fullname
-            }
-        });
-    } catch (error) {
-        console.log("Lỗi login:", error);
-        return res.status(500).json({success: false, message: 'Lỗi server!'})
+  const { email, phone, password } = req.body;
+  try {
+    if ((!email && !phone) || !password) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Thiếu thông tin bắt buộc!" });
     }
-}
+
+    // tìm user theo email hoặc phone
+    const user = await User.findOne(email ? { email } : { phone });
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Người dùng không tồn tại!" });
+    }
+
+    if (user.password !== password) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Sai mật khẩu!" });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Đăng nhập thành công!",
+      user: {
+        id: user._id,
+        email: user.email,
+        phone: user.phone,
+        username: user.username,
+        fullname: user.fullname,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+      },
+    });
+  } catch (error) {
+    console.log("Lỗi login:", error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Lỗi server!" });
+  }
+};

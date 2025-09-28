@@ -8,5 +8,7 @@ const router = express.Router();
 router.post("/checkUser", checkUser);
 router.post("/createUser", createUser);
 router.post("/login",login);
+//friend
+
 
 module.exports = router;
